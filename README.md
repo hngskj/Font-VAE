@@ -24,7 +24,12 @@ idx | Font | sample images
 
 ---
 
-### 2 Dimensional latent space w/ 20 epochs
+### Trainging history w/ 20 epochs
+![](font_vae_cnn/plot_e20c10/history.png)
+
+---
+
+### 2 Dimensional latent space
 ![](font_vae_cnn/plot_e20c10/_plot.gif)
 
 ---
