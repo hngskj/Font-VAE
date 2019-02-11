@@ -21,7 +21,7 @@ width, height = 112, 112<br/>
 font size = 25<br/>
 used characters = "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"<br/>
 
-idx | Font | sample images
+idx | font name | sample images
 ------------ | ------------ | -------------
 0 | EBGaramond | ![](example_dataset/0_EBGaramond-Regular1.png) ![](example_dataset/0_EBGaramond-Regular2.png) ![](example_dataset/0_EBGaramond-Regular3.png) ![](example_dataset/0_EBGaramond-Regular4.png) ![](example_dataset/0_EBGaramond-Regular5.png)
 1 | PT_Serif | ![](example_dataset/1_PT_Serif-Web-Regular1.png) ![](example_dataset/1_PT_Serif-Web-Regular2.png) ![](example_dataset/1_PT_Serif-Web-Regular3.png) ![](example_dataset/1_PT_Serif-Web-Regular4.png) ![](example_dataset/1_PT_Serif-Web-Regular5.png)
@@ -36,7 +36,9 @@ idx | Font | sample images
 
 ---
 
-### Trainging history w/ 20 epochs
+### Trainging history 
+
+w/ 20 epochs
 
 ![](font_vae_cnn/plot_e20c10/history.png)
 
