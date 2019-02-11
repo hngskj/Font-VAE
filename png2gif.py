@@ -32,5 +32,5 @@ for idx, img in enumerate(name_list):
 image.save(dir+"_plot.gif",
            save_all=True,
            append_images=images_list[1:],
-           duration=200,
+           duration=300,
            loop=0)
