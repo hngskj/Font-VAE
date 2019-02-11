@@ -14,6 +14,11 @@ encoder | decoder
 ---
 
 ### Used dataset
+dataset size = train 5000 & validation 1000 per each class<br/>
+width, height = 112, 112<br/>
+font size = 25<br/>
+used characters = "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"<br/>
+
 idx | Font | sample images
 ------------ | ------------ | -------------
 0 | EBGaramond | ![](example_dataset/0_EBGaramond-Regular1.png) ![](example_dataset/0_EBGaramond-Regular2.png) ![](example_dataset/0_EBGaramond-Regular3.png) ![](example_dataset/0_EBGaramond-Regular4.png) ![](example_dataset/0_EBGaramond-Regular5.png)
