@@ -14,7 +14,7 @@ japanese = hiragana + katakana
 cyrillic = "АаБбВвГгДдЕеЖжЗзИиЙйКкЛлМмНнОоПпРрСсТтУуФфХхЦцЧчШшЩщЬьЮюЯя"
 greek = "ΑαΒβΓγΔδΕεΖζΗηΘθΙιΚκΛλΜμΝνΞξΟοΠπΡρΣσςΤτΥυΦφΧχΨψΩω"
 
-case = list(japanese)
+case = list(english)
 font_list = [filename for filename in glob.glob('font_data/*')]
 
 print(font_list)
