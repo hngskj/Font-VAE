@@ -1,4 +1,9 @@
-# Variational Autoencoder for font analysis
+# Variational Autoencoder with Convnets for Font analysis
+
+The VAE has a modular design. The encoder, decoder and VAE are 3 models that share weights. After training the VAE model, the encoder can be used to generate latent vectors. The decoder can be used to generate font images by sampling the latent vector from a Gaussian distribution with mean=0 and std=1.
+
+---
+
 
 ### VAE architecture<br/>
 
@@ -34,14 +39,14 @@ idx | Font | sample images
 
 ---
 
-#### reference:<br/>
-Kingma, Diederik P., and Max Welling. "Auto-encoding variational bayes. "https://arxiv.org/abs/1312.6114 <br/>
-https://blog.keras.io/building-autoencoders-in-keras.html <br/>
-https://github.com/keras-team/keras/blob/master/examples/variational_autoencoder_deconv.py
+#### References:<br/>
+[1] Kingma, Diederik P., and Max Welling. "Auto-encoding variational bayes. "https://arxiv.org/abs/1312.6114 <br/>
+[2] https://blog.keras.io/building-autoencoders-in-keras.html <br/>
+[3] https://github.com/keras-team/keras/blob/master/examples/variational_autoencoder_deconv.py
 
 
-#### font dataset:<br/>
-https://fonts.google.com/
+#### Dataset:<br/>
+- https://fonts.google.com/
 
 
 
