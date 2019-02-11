@@ -176,7 +176,7 @@ z = Lambda(sampling, output_shape=(latent_dim,), name='z')([z_mean, z_log_var])
 # instantiate encoder model
 encoder = Model(inputs, [z_mean, z_log_var, z], name='Encoder')
 encoder.summary()
-plot_model(encoder, to_file='font_vae_cnn_encoder.png', show_shapes=True)
+plot_model(encoder, to_file='summary/font_vae_cnn_encoder.png', show_shapes=True)
 
 # build decoder model
 latent_inputs = Input(shape=(latent_dim,), name='z_sampling')
@@ -200,7 +200,7 @@ outputs = Conv2DTranspose(filters=1, kernel_size=kernel_size, activation='sigmoi
 # instantiate decoder model
 decoder = Model(latent_inputs, outputs, name='Decoder')
 decoder.summary()
-plot_model(decoder, to_file='font_vae_cnn_decoder.png', show_shapes=True)
+plot_model(decoder, to_file='summary/font_vae_cnn_decoder.png', show_shapes=True)
 
 # instantiate VAE model
 outputs = decoder(encoder(inputs)[2])
@@ -232,7 +232,7 @@ if __name__ == '__main__':
     vae.compile(optimizer='rmsprop', loss=vae_loss_custom, metrics=['accuracy'])
     # vae.compile(optimizer='adadelta', loss=vae_loss_custom, metrics=['accuracy'])
     vae.summary()
-    plot_model(vae, to_file='font_vae_cnn.png', show_shapes=True)
+    plot_model(vae, to_file='summary/font_vae_cnn.png', show_shapes=True)
 
     tb_hist = TensorBoard(log_dir=log_dir, histogram_freq=0, write_graph=True, write_images=True)
     # checkpoint = ModelCheckpoint(filepath='font_vae_cnn/model/checkpoint-{epoch:02d}.hdf5')
