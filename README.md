@@ -52,9 +52,9 @@ w/ 20 epochs
 
 #### References:
 
-[1] Kingma, Diederik P., and Max Welling. "Auto-encoding variational bayes." https://arxiv.org/abs/1312.6114 <br/>
-[2] https://blog.keras.io/building-autoencoders-in-keras.html <br/>
-[3] https://github.com/keras-team/keras/blob/master/examples/variational_autoencoder_deconv.py
+[1] [Kingma, Diederik P., and Max Welling. "Auto-encoding variational bayes."](https://arxiv.org/abs/1312.6114) <br/>
+[2] [Keras Blog: Building Autoencoders in Keras](https://blog.keras.io/building-autoencoders-in-keras.html) <br/>
+[3] [Keras example: VAE](https://github.com/keras-team/keras/blob/master/examples/variational_autoencoder_deconv.py)
 
 
 #### Dataset:
