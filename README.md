@@ -1,11 +1,13 @@
-# Variational Autoencoder with Convnets for Font analysis
+# Analysis of font shape <br/> using Variational Autoencoder with Convnets
 
-The VAE has a modular design. The encoder, decoder and VAE are 3 models that share weights. After training the VAE model, the encoder can be used to generate latent vectors. The decoder can be used to generate font images by sampling the latent vector from a Gaussian distribution with mean=0 and std=1.
+
 
 ---
 
 
 ### VAE architecture<br/>
+
+The VAE has a modular design. The encoder, decoder and VAE are 3 models that share weights. After training the VAE model, the encoder can be used to generate latent vectors. The decoder can be used to generate font images by sampling the latent vector from a Gaussian distribution with mean=0 and std=1.
 
 encoder | decoder
 ------------ | -------------
