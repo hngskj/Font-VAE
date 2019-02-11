@@ -5,7 +5,7 @@
 ---
 
 
-### VAE architecture<br/>
+### VAE architecture
 
 The VAE has a modular design. The encoder, decoder and VAE are 3 models that share weights. After training the VAE model, the encoder can be used to generate latent vectors. The decoder can be used to generate font images by sampling the latent vector from a Gaussian distribution with mean=0 and std=1.
 
@@ -37,22 +37,26 @@ idx | Font | sample images
 ---
 
 ### Trainging history w/ 20 epochs
+
 ![](font_vae_cnn/plot_e20c10/history.png)
 
 ---
 
-### 2 Dimensional latent space
+### 2 dimensional latent space 
+
 ![](font_vae_cnn/plot_e20c10/_plot.gif)
 
 ---
 
-#### References:<br/>
+#### References:
+
 [1] Kingma, Diederik P., and Max Welling. "Auto-encoding variational bayes." https://arxiv.org/abs/1312.6114 <br/>
 [2] https://blog.keras.io/building-autoencoders-in-keras.html <br/>
 [3] https://github.com/keras-team/keras/blob/master/examples/variational_autoencoder_deconv.py
 
 
-#### Dataset:<br/>
+#### Dataset:
+
 - https://fonts.google.com/
 
 
