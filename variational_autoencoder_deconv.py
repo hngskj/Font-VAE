@@ -6,8 +6,7 @@ The decoder can be used to generate font images by sampling the
 latent vector from a Gaussian distribution with mean=0 and std=1.
 
 # Reference
-
-[1] Kingma, Diederik P., and Max Welling.
+Kingma, Diederik P., and Max Welling.
 "Auto-encoding variational bayes."
 https://arxiv.org/abs/1312.6114
 '''
