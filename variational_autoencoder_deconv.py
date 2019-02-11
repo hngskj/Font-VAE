@@ -141,7 +141,7 @@ input_shape = (image_size, image_size, 1)
 kernel_size = 3
 filters = 16
 latent_dim = 2
-epochs = 100
+epochs = 2
 log_dir='./logs'
 
 # VAE model = encoder + decoder
