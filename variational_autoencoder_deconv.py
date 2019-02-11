@@ -73,7 +73,9 @@ def plot_results(models, data, batch_size=128, model_name="font_vae"):
     plt.scatter(z_mean[:, 0], z_mean[:, 1], c=y_label,
                 cmap=plt.cm.get_cmap('tab10', n_class), s=5, alpha=0.5) # tab10, gist_rainbow
     font_name_list = list(plot_generator.class_indices.keys())
-    # ['7_DancingScript-Regular', '5_Bangers-Regular', '4_Righteous-Regular', '6_Pacifico-Regular','8_Inconsolata-Regular', '1_PT_Serif-Web-Regular', '0_EBGaramond-Regular', '3_Roboto-Regular','2_NotoSans-Regular', '9_VT323-Regular']
+    # ['7_DancingScript-Regular', '5_Bangers-Regular', '4_Righteous-Regular',
+    # '6_Pacifico-Regular','8_Inconsolata-Regular', '1_PT_Serif-Web-Regular',
+    # '0_EBGaramond-Regular', '3_Roboto-Regular','2_NotoSans-Regular', '9_VT323-Regular']
 
     cbar = plt.colorbar(ticks=range(n_class))
     # cbar.set_ticklabels(font_name_list)
