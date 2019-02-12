@@ -40,13 +40,13 @@ idx | font name | sample images
 
 w/ 20 epochs
 
-![](font_vae_cnn/plot_e20c10/history.png)
+![](plot/epoch20/history.png)
 
 ---
 
 ### 2 dimensional latent space 
 
-![](font_vae_cnn/plot_e20c10/_plot.gif)
+![](plot/epoch20/_plot.gif)
 
 ---
 
