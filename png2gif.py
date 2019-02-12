@@ -1,8 +1,8 @@
 from PIL import Image, ImageFont, ImageDraw
 import glob
 
-dir = "font_vae_cnn\plot_e20c10/"
-epoch = 20
+dir = "font_vae_cnn\plot_e200c10/"
+epoch = 80
 
 font=ImageFont.truetype("font_data/NotoSans-Regular.ttf", 30)
 
@@ -32,5 +32,5 @@ for idx, img in enumerate(name_list):
 image.save(dir+"_plot.gif",
            save_all=True,
            append_images=images_list[1:],
-           duration=300,
+           duration=100,
            loop=0)
