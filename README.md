@@ -38,9 +38,10 @@ idx | font name | sample images
 
 ### Trainging history 
 
-w/ 20 epochs
+epoch | 20 | 80
+------------ | ------------ | -------------
+log | ![](plot/epoch20/history.png) | ![](plot/epoch20/history.png)
 
-![](plot/epoch20/history.png)
 
 ---
 
