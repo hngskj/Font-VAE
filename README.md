@@ -42,15 +42,10 @@ idx | font name | sample images
 epoch | 20 | 50 | 200
 ------------ | ------------ | ------------- | -------------
 log | ![](plot/epoch20/history.png) | ![](plot/epoch50/history.png) | ![](plot/epoch200/history.png)
-
+latent space | ![](plot/epoch20/_plot.gif) | ![](plot/epoch50/_plot.gif) | ![](plot/epoch200/_plot.gif)
 
 ---
 
-### 2 dimensional latent space 
-
-epoch=20 | epoch=50 | epoch=200
-:------------: | :------------: | :------------:
-![](plot/epoch20/_plot.gif) | ![](plot/epoch50/_plot.gif) | ![](plot/epoch200/_plot.gif)
 
 ### Training progress in epochs
 1 frame = 1 batch <br/>
