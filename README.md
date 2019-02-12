@@ -20,6 +20,7 @@ dataset size = train 5000 & validation 1000 per each class<br/>
 width, height = 112, 112<br/>
 font size = 25<br/>
 used characters = "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"<br/>
+images are generated with [font2png.py](font2png.py)
 
 idx | font name | sample images
 ------------ | ------------ | -------------
@@ -40,16 +41,16 @@ idx | font name | sample images
 
 epoch | 20 | 200
 ------------ | ------------ | -------------
-log | ![](plot/epoch20/history.png) | ![](plot/epoch80/history.png)
+log | ![](plot/epoch20/history.png) | ![](plot/epoch200/history.png)
 
 
 ---
 
 ### 2 dimensional latent space 
 
-epoch | 20 | 80
+epoch | 20 | 200
 ------------ | ------------ | -------------
-plot | ![](plot/epoch20/_plot.gif) | ![](plot/epoch80/_plot.gif)
+plot | ![](plot/epoch20/_plot.gif) | ![](plot/epoch200/_plot.gif) only with 80
 
 ---
 
