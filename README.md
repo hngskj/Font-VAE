@@ -47,11 +47,19 @@ log | ![](plot/epoch20/history.png) | ![](plot/epoch200/history.png)
 ---
 
 ### 2 dimensional latent space 
+##### 5 classes with total 10 epoch <br/>
 
-asdf | asdf
------------- | ------------
+epoch=1 | epoch=2
+:------------: | :------------:
 ![](plot/epoch10/_plot_e1.gif) | ![](plot/epoch10/_plot_e2.gif)
+**epoch=3** | **epoch=4**
 ![](plot/epoch10/_plot_e4.gif) | ![](plot/epoch10/_plot_e5.gif)
+
+##### 10 classes <br/>
+
+epoch=20 | epoch=200
+:------------: | :------------:
+![](plot/epoch20/_plot.gif) | ![](plot/epoch200/_plot.gif)
 
 ---
 
