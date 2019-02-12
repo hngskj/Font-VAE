@@ -1,16 +1,3 @@
-'''
-The VAE has a modular design. The encoder, decoder and VAE
-are 3 models that share weights. After training the VAE model,
-the encoder can be used to  generate latent vectors.
-The decoder can be used to generate font images by sampling the
-latent vector from a Gaussian distribution with mean=0 and std=1.
-
-# Reference
-Kingma, Diederik P., and Max Welling.
-"Auto-encoding variational bayes."
-https://arxiv.org/abs/1312.6114
-'''
-
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
@@ -143,7 +130,7 @@ input_shape = (image_size, image_size, 1)
 kernel_size = 3
 filters = 16
 latent_dim = 2
-epochs = 2
+epochs = 70
 log_dir='./logs'
 
 # VAE model = encoder + decoder
