@@ -48,9 +48,10 @@ log | ![](plot/epoch20/history.png) | ![](plot/epoch200/history.png)
 
 ### 2 dimensional latent space 
 
-epoch | 20 | 200
+asdf | asdf | asdf
 ------------ | ------------ | -------------
-plot | ![](plot/epoch20/_plot.gif) | ![](plot/epoch200/_plot.gif) only with 80
+![](plot/epoch10/_plot_e1.gif) | ![](plot/epoch10/_plot_e2.gif) | ![](plot/epoch10/_plot_e3.gif)
+![](plot/epoch10/_plot_e4.gif) | ![](plot/epoch10/_plot_e5.gif) | ![](plot/epoch10/_plot_e6.gif)
 
 ---
 
