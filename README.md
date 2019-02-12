@@ -57,6 +57,8 @@ epoch=1 | epoch=2 | epoch=3
 **epoch=4** | **epoch=5** | **epoch=6**
 ![](plot/epoch10/_plot_e4.gif) | ![](plot/epoch10/_plot_e5.gif) | ![](plot/epoch10/_plot_e6.gif)
 
+---
+
 ### Experiment with 3 dimentional latent space 
 
 ![](plot/epoch10/plot_3d.gif)
