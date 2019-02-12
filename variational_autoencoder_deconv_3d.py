@@ -134,16 +134,13 @@ input_shape = (image_size, image_size, 1)
 kernel_size = 3
 filters = 16
 latent_dim = 3
-epochs = 50
+epochs = 12
 log_dir='./logs'
 
 # VAE model = encoder + decoder
 # build encoder model
 inputs = Input(shape=input_shape, name='encoder_input')
 x = inputs
-# for i in range(4):
-#     filters *= 2
-#     x = Conv2D(filters=filters, kernel_size=kernel_size, activation='relu', strides=2, padding='same')(x)
 
 x = Conv2D(filters=32, kernel_size=kernel_size, activation='relu', strides=2, padding='same')(x)
 x = Dropout(0.2)(x)
@@ -162,8 +159,6 @@ x = Dense(16, activation='relu')(x)
 z_mean = Dense(latent_dim, name='z_mean')(x)
 z_log_var = Dense(latent_dim, name='z_log_var')(x)
 
-# use reparameterization trick to push the sampling out as input
-# note that "output_shape" isn't necessary with the TensorFlow backend
 z = Lambda(sampling, output_shape=(latent_dim,), name='z')([z_mean, z_log_var])
 
 # instantiate encoder model
@@ -175,10 +170,6 @@ plot_model(encoder, to_file='summary/font_vae_cnn_encoder.png', show_shapes=True
 latent_inputs = Input(shape=(latent_dim,), name='z_sampling')
 x = Dense(shape[1] * shape[2] * shape[3], activation='relu')(latent_inputs)
 x = Reshape((shape[1], shape[2], shape[3]))(x)
-
-# for i in range(4):
-#     x = Conv2DTranspose(filters=filters, kernel_size=kernel_size, activation='relu', strides=2, padding='same')(x)
-#     filters //= 2
 
 x = Conv2DTranspose(filters=256, kernel_size=kernel_size, activation='relu', strides=2, padding='same')(x)
 x = Dropout(0.2)(x)
@@ -215,10 +206,7 @@ if __name__ == '__main__':
     plot_data = (x_plot, y_plot)
 
     def vae_loss_custom(y_true, y_pred):
-        # xent_loss = image_size * image_size * binary_crossentropy(K.flatten(y_true), K.flatten(y_pred))
         xent_loss = binary_crossentropy(K.flatten(y_true), K.flatten(y_pred))
-        # xent_loss = image_size * image_size * mse(K.flatten(y_true), K.flatten(y_pred))
-        # kl_loss = - 0.5 * K.sum(1 + z_log_var - K.square(z_mean) - K.exp(z_log_var), axis=-1)
         kl_loss = -5e-4 * K.sum(1 + z_log_var - K.square(z_mean) - K.exp(z_log_var), axis=-1)
         vae_loss = K.mean(xent_loss + kl_loss)
         return vae_loss
@@ -239,7 +227,6 @@ if __name__ == '__main__':
     )
     vae.save_weights('font_vae_cnn.h5')
 
-    # plot_results(models, data, batch_size=batch_size, model_name="font_vae_cnn")
     plot_results(models, plot_data, batch_size=batch_size, model_name="font_vae_cnn")
 
     fig, loss_ax = plt.subplots()

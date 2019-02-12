@@ -44,15 +44,11 @@ def plot_results(models, data, batch_size=128, model_name="font_vae"):
     os.makedirs(model_name, exist_ok=True)
     now = datetime.datetime.now()
 
-    # y_label = validation_generator.classes
-    # class_dictionary = validation_generator.class_indices
-
     name = "plot/font_vae_mean_"+now.strftime("%m %d %H %M %S")+".png"
     filename = os.path.join(model_name, name)
 
     # display a 2D plot of the digit classes in the latent space
     z_mean, _, _ = encoder.predict(x_test, batch_size=batch_size)
-    # z_mean, _, _ = encoder.predict_generator(x_test, steps=len(validation_generator))
 
     n_class = y_label.max() + 1
 
@@ -122,24 +118,19 @@ plot_generator = plot_datagen.flow_from_directory(
 x_test, y_test = next(validation_generator)
 x_plot, y_plot = next(plot_generator)
 y_label = plot_generator.classes
-# class_dictionary = validation_generator.class_indices
-
 
 # network parameters
 input_shape = (image_size, image_size, 1)
 kernel_size = 3
 filters = 16
 latent_dim = 2
-epochs = 70
-log_dir='./logs'
+epochs = 50
+log_dir='./font_vae_cnn/plot'
 
 # VAE model = encoder + decoder
 # build encoder model
 inputs = Input(shape=input_shape, name='Encoder_input')
 x = inputs
-# for i in range(4):
-#     filters *= 2
-#     x = Conv2D(filters=filters, kernel_size=kernel_size, activation='relu', strides=2, padding='same')(x)
 
 x = Conv2D(filters=32, kernel_size=kernel_size, activation='relu', strides=2, padding='same')(x)
 x = Dropout(0.2)(x)
@@ -171,10 +162,6 @@ plot_model(encoder, to_file='summary/font_vae_cnn_encoder.png', show_shapes=True
 latent_inputs = Input(shape=(latent_dim,), name='z_sampling')
 x = Dense(shape[1] * shape[2] * shape[3], activation='relu')(latent_inputs)
 x = Reshape((shape[1], shape[2], shape[3]))(x)
-
-# for i in range(4):
-#     x = Conv2DTranspose(filters=filters, kernel_size=kernel_size, activation='relu', strides=2, padding='same')(x)
-#     filters //= 2
 
 x = Conv2DTranspose(filters=256, kernel_size=kernel_size, activation='relu', strides=2, padding='same')(x)
 x = Dropout(0.2)(x)
@@ -210,22 +197,22 @@ if __name__ == '__main__':
 
 
     def vae_loss_custom(y_true, y_pred):
-        # xent_loss = image_size * image_size * binary_crossentropy(K.flatten(y_true), K.flatten(y_pred))
         xent_loss = binary_crossentropy(K.flatten(y_true), K.flatten(y_pred))
-        # xent_loss = image_size * image_size * mse(K.flatten(y_true), K.flatten(y_pred))
-        # kl_loss = - 0.5 * K.sum(1 + z_log_var - K.square(z_mean) - K.exp(z_log_var), axis=-1)
         kl_loss = -5e-4 * K.sum(1 + z_log_var - K.square(z_mean) - K.exp(z_log_var), axis=-1)
         vae_loss = K.mean(xent_loss + kl_loss)
         return vae_loss
 
     vae.compile(optimizer='rmsprop', loss=vae_loss_custom, metrics=['accuracy'])
-    # vae.compile(optimizer='adadelta', loss=vae_loss_custom, metrics=['accuracy'])
     vae.summary()
     plot_model(vae, to_file='summary/font_vae_cnn.png', show_shapes=True)
 
     tb_hist = TensorBoard(log_dir=log_dir, histogram_freq=0, write_graph=True, write_images=True)
-    # checkpoint = ModelCheckpoint(filepath='font_vae_cnn/model/checkpoint-{epoch:02d}.hdf5')
-    lcb = LambdaCallback(on_epoch_end=lambda epoch, logs: plot_results(models, plot_data, batch_size=batch_size, model_name="font_vae_cnn"))
+    lcb = LambdaCallback(on_epoch_end=lambda epoch, logs: plot_results(models, plot_data,
+                                                                       batch_size=batch_size,
+                                                                       model_name="font_vae_cnn"))
+    # lcb = LambdaCallback(on_batch_end=lambda batch, logs: plot_results(models, plot_data,
+    #                                                                    batch_size=batch_size,
+    #                                                                    model_name="font_vae_cnn"))
     # checkpoint_model = LambdaCallback(on_epoch_end=lambda epoch, logs: vae.save('font_vae_cnn/model/mymodel.h5'))
 
     hist = vae.fit_generator(
@@ -237,9 +224,6 @@ if __name__ == '__main__':
         callbacks=[lcb, tb_hist]
     )
     # vae.save_weights('font_vae_cnn.h5')
-
-    # plot_results(models, data, batch_size=batch_size, model_name="font_vae_cnn")
-    # plot_results(models, plot_data, batch_size=batch_size, model_name="font_vae_cnn")
 
     fig, loss_ax = plt.subplots()
     acc_ax = loss_ax.twinx()
@@ -254,4 +238,4 @@ if __name__ == '__main__':
     acc_ax.plot(hist.history['val_acc'], 'g', label='val acc')
     acc_ax.set_ylabel('accuracy')
     acc_ax.legend(loc='lower left')
-    plt.savefig("font_vae_cnn/history.png")
+    plt.savefig("font_vae_cnn/plot/history.png")
