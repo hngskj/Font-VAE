@@ -40,7 +40,7 @@ idx | font name | sample images
 
 epoch | 20 | 200
 ------------ | ------------ | -------------
-log | ![](plot/epoch20/history.png) | ![](plot/epoch80/history.png)
+log | ![](plot/epoch20/history.png) | ![](plot/epoch200/history.png)
 
 
 ---
@@ -49,7 +49,7 @@ log | ![](plot/epoch20/history.png) | ![](plot/epoch80/history.png)
 
 epoch | 20 | 80
 ------------ | ------------ | -------------
-plot | ![](plot/epoch20/_plot.gif) | ![](plot/epoch80/_plot.gif)
+plot | ![](plot/epoch20/_plot.gif) | ![](plot/epoch200/_plot.gif)
 
 ---
 
