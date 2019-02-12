@@ -39,29 +39,32 @@ idx | font name | sample images
 
 ### Trainging history 
 
-epoch | 20 | 200
------------- | ------------ | -------------
-log | ![](plot/epoch20/history.png) | ![](plot/epoch200/history.png)
+epoch | 20 | 50 | 200
+------------ | ------------ | ------------- | -------------
+log | ![](plot/epoch20/history.png) | ![](plot/epoch50/history.png) | ![](plot/epoch200/history.png)
 
 
 ---
 
 ### 2 dimensional latent space 
 
-##### 10 classes <br/>
+epoch=20 | epoch=50 | epoch=200
+:------------: | :------------: | :------------:
+![](plot/epoch20/_plot.gif) | ![](plot/epoch50/_plot.gif) | ![](plot/epoch200/_plot.gif)
 
-epoch=20 | epoch=200
-:------------: | :------------:
-![](plot/epoch20/_plot.gif) | ![](plot/epoch200/_plot.gif)
+### Training progress in epochs
+1 frame = 1 batch <br/>
+1 epoch = 196 batchs
 
-##### 5 classes with total 10 epoch <br/>
+epoch=1 | epoch=2 | epoch=3
+:------------: | :------------: | :------------:
+![](plot/epoch10/_plot_e1.gif) | ![](plot/epoch10/_plot_e2.gif) | ![](plot/epoch10/_plot_e3.gif)
+**epoch=4** | **epoch=5** | **epoch=6**
+![](plot/epoch10/_plot_e4.gif) | ![](plot/epoch10/_plot_e5.gif) | ![](plot/epoch10/_plot_e6.gif)
 
-epoch=1 | epoch=2
-:------------: | :------------:
-![](plot/epoch10/_plot_e1.gif) | ![](plot/epoch10/_plot_e2.gif)
-**epoch=3** | **epoch=4**
-![](plot/epoch10/_plot_e4.gif) | ![](plot/epoch10/_plot_e5.gif)
+### Experiment with 3 dimentional latent space 
 
+![](plot/epoch10/plot_3d.gif)
 
 ---
 
