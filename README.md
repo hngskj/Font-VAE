@@ -38,15 +38,18 @@ idx | font name | sample images
 
 ### Trainging history 
 
-w/ 20 epochs
+epoch | 20 | 200
+------------ | ------------ | -------------
+log | ![](plot/epoch20/history.png) | ![](plot/epoch80/history.png)
 
-![](font_vae_cnn/plot_e20c10/history.png)
 
 ---
 
 ### 2 dimensional latent space 
 
-![](font_vae_cnn/plot_e20c10/_plot.gif)
+epoch | 20 | 80
+------------ | ------------ | -------------
+plot | ![](plot/epoch20/_plot.gif) | ![](plot/epoch80/_plot.gif)
 
 ---
 
