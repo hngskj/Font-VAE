@@ -33,8 +33,6 @@ def sampling(args):
     epsilon = K.random_normal(shape=(batch, dim))
     return z_mean + K.exp(0.5 * z_log_var) * epsilon
 
-#################################################################################################
-#################################################################################################
 def plot_results(models, data, batch_size=128, model_name="font_vae"):
 
     encoder, decoder = models
@@ -45,7 +43,6 @@ def plot_results(models, data, batch_size=128, model_name="font_vae"):
     name = "plot/font_vae_mean_"+now.strftime("%m %d %H %M %S")+".png"
     filename = os.path.join(model_name, name)
 
-    # display a 2D plot of the digit classes in the latent space
     z_mean, _, _ = encoder.predict(x_test, batch_size=batch_size)
 
     n_class = y_label.max() + 1
@@ -63,55 +60,52 @@ def plot_results(models, data, batch_size=128, model_name="font_vae"):
     plt.close('all')
     # plt.show()
 
-#################################################################################################
-#################################################################################################
+################
+# Load dataset #
+################
 batch_size = 128
 image_size = 112
-train_datagen = ImageDataGenerator(
-    rotation_range=20,
-    zoom_range=0.2,
-    horizontal_flip=True,
-    rescale=1./255
-)
+data_dir = 'data/dataset_5/'
+
+train_datagen = ImageDataGenerator(rotation_range=20,
+                                   zoom_range=0.2,
+                                   horizontal_flip=True,
+                                   rescale=1./255)
 
 test_datagen = ImageDataGenerator(rescale=1./255)
 plot_datagen = ImageDataGenerator(rescale=1./255)
 
-train_generator = train_datagen.flow_from_directory(
-    'data/dataset/train',
-    target_size=(112, 112),
-    batch_size=batch_size,
-    color_mode='grayscale',
-    class_mode='input'
-)
+train_generator = train_datagen.flow_from_directory(data_dir+'train',
+                                                    target_size=(112, 112),
+                                                    batch_size=batch_size,
+                                                    color_mode='grayscale',
+                                                    class_mode='input')
 
-validation_generator = test_datagen.flow_from_directory(
-    'data/dataset/validation',
-    target_size=(112, 112),
-    batch_size=batch_size,
-    color_mode='grayscale',
-    class_mode='input'
-)
+validation_generator = test_datagen.flow_from_directory(data_dir+'validation',
+                                                        target_size=(112, 112),
+                                                        batch_size=batch_size,
+                                                        color_mode='grayscale',
+                                                        class_mode='input')
 
-plot_generator = plot_datagen.flow_from_directory(
-    'data/dataset/validation',
-    target_size=(112, 112),
-    batch_size=validation_generator.n,
-    color_mode='grayscale',
-    class_mode='input',
-    shuffle=False
-)
+plot_generator = plot_datagen.flow_from_directory(data_dir+'validation',
+                                                  target_size=(112, 112),
+                                                  batch_size=validation_generator.n,
+                                                  color_mode='grayscale',
+                                                  class_mode='input',
+                                                  shuffle=False)
 
 x_test, y_test = next(validation_generator)
 x_plot, y_plot = next(plot_generator)
 y_label = plot_generator.classes
 
-
+#############
+# VAE model #
+#############
 input_shape = (image_size, image_size, 1)
 kernel_size = 3
 filters = 16
 latent_dim = 2
-epochs = 20
+epochs = 100
 log_dir='./font_vae_cnn/plot'
 
 
@@ -163,6 +157,7 @@ vae = Model(inputs, outputs, name='VAE')
 
 #################################################################################################
 #################################################################################################
+
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     help_ = "Load h5 model trained weights"
@@ -194,14 +189,12 @@ if __name__ == '__main__':
     #                                                                    model_name="font_vae_cnn"))
     # checkpoint_model = LambdaCallback(on_epoch_end=lambda epoch, logs: vae.save('font_vae_cnn/model/mymodel.h5'))
 
-    hist = vae.fit_generator(
-        train_generator,
-        steps_per_epoch=len(train_generator),
-        epochs=epochs,
-        validation_data=validation_generator,
-        validation_steps=len(validation_generator),
-        callbacks=[lcb, tb_hist]
-    )
+    hist = vae.fit_generator(train_generator,
+                             steps_per_epoch=len(train_generator),
+                             epochs=epochs,
+                             validation_data=validation_generator,
+                             validation_steps=len(validation_generator),
+                             callbacks=[lcb, tb_hist])
     # vae.save_weights('font_vae_cnn.h5')
 
     fig, loss_ax = plt.subplots()

@@ -14,20 +14,13 @@ from tensorflow.keras import backend as K
 from tensorflow.keras.backend import set_session
 
 import tensorflow as tf
-import numpy as np
 import matplotlib.pyplot as plt
 import argparse
 import os
-from os import makedirs
-from os.path import exists, join
-
-import plotly.plotly as py
 import plotly.graph_objs as go
 import plotly.offline as offline
 
-config = tf.ConfigProto(
-    gpu_options = tf.GPUOptions(per_process_gpu_memory_fraction=0.8)
-)
+config = tf.ConfigProto(gpu_options=tf.GPUOptions(per_process_gpu_memory_fraction=0.8))
 config.gpu_options.allow_growth = True
 session = tf.Session(config=config)
 set_session(session)
@@ -88,10 +81,12 @@ def plot_results(models,
 # Generating dataset
 batch_size = 128
 image_size = 112
+data_dir = 'data/dataset_5/'
+
 train_datagen = ImageDataGenerator(
-    # rotation_range=20,
-    # zoom_range=0.2,
-    # horizontal_flip=True,
+    rotation_range=20,
+    zoom_range=0.2,
+    horizontal_flip=True,
     rescale=1./255
 )
 
@@ -99,7 +94,7 @@ test_datagen = ImageDataGenerator(rescale=1./255)
 plot_datagen = ImageDataGenerator(rescale=1./255)
 
 train_generator = train_datagen.flow_from_directory(
-    'data/dataset/train',
+    data_dir+'train',
     target_size=(112, 112),
     batch_size=batch_size,
     color_mode='grayscale',
@@ -107,7 +102,7 @@ train_generator = train_datagen.flow_from_directory(
 )
 
 validation_generator = test_datagen.flow_from_directory(
-    'data/dataset/validation',
+    data_dir+'validation',
     target_size=(112, 112),
     batch_size=batch_size,
     color_mode='grayscale',
@@ -116,7 +111,7 @@ validation_generator = test_datagen.flow_from_directory(
 )
 
 plot_generator = plot_datagen.flow_from_directory(
-    'data/dataset/validation',
+    data_dir+'validation',
     target_size=(112, 112),
     batch_size=validation_generator.n,
     color_mode='grayscale',
