@@ -20,7 +20,8 @@ dataset size = train 5000 & validation 1000 per each class<br/>
 width, height = 112, 112<br/>
 font size = 25<br/>
 used characters = "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"<br/>
-images are generated with [font2png.py](font2png.py)
+images are generated with [font2png.py](font2png.py)<br/>
+fonts are from [Google Fonts](https://fonts.google.com/)
 
 idx | font name | sample images
 ------------ | ------------ | -------------
@@ -57,6 +58,8 @@ epoch=1 | epoch=2 | epoch=3
 **epoch=4** | **epoch=5** | **epoch=6**
 ![](plot/epoch10/_plot_e4.gif) | ![](plot/epoch10/_plot_e5.gif) | ![](plot/epoch10/_plot_e6.gif)
 
+---
+
 ### Experiment with 3 dimentional latent space 
 
 ![](plot/epoch10/plot_3d.gif)
@@ -67,12 +70,7 @@ epoch=1 | epoch=2 | epoch=3
 
 [1] [Kingma, Diederik P., and Max Welling. "Auto-encoding variational bayes."](https://arxiv.org/abs/1312.6114) <br/>
 [2] [Keras Blog: Building Autoencoders in Keras](https://blog.keras.io/building-autoencoders-in-keras.html) <br/>
-[3] [Keras example: VAE](https://github.com/keras-team/keras/blob/master/examples/variational_autoencoder_deconv.py)
-
-
-#### Dataset:
-
-- https://fonts.google.com/
-
-
-
+[3] [Keras example: VAE](https://github.com/keras-team/keras/blob/master/examples/variational_autoencoder_deconv.py) <br/>
+[4] [Erik Bernhardsson. "Analyzing 50k fonts using deep neural networks"](https://erikbern.com/2016/01/21/analyzing-50k-fonts-using-deep-neural-networks.html) <br/>
+[5] [TJ TORRES. "A Fontastic Voyage: Generative Fonts with Adversarial Networks"](https://multithreaded.stitchfix.com/blog/2016/02/02/a-fontastic-voyage/) <br/>
+[6] [Julien Despois. "Latent space visualization — Deep Learning bits #2"](https://hackernoon.com/latent-space-visualization-deep-learning-bits-2-bd09a46920df)
