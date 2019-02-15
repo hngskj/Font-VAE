@@ -7,20 +7,18 @@ from tensorflow.keras.layers import Conv2D, Flatten, Lambda, Dropout
 from tensorflow.keras.layers import Reshape, Conv2DTranspose
 from tensorflow.keras.models import Model
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
-from tensorflow.keras.losses import mse, binary_crossentropy
+from tensorflow.keras.losses import binary_crossentropy
 from tensorflow.keras.utils import plot_model
-from tensorflow.keras.callbacks import TensorBoard, LambdaCallback, ModelCheckpoint
+from tensorflow.keras.callbacks import TensorBoard, LambdaCallback
 from tensorflow.keras import backend as K
 from tensorflow.keras.backend import set_session
 
 import tensorflow as tf
-import numpy as np
 import matplotlib.pyplot as plt
 import argparse
 import os
 import datetime
-from os import makedirs
-from os.path import exists, join
+
 
 config = tf.ConfigProto(gpu_options=tf.GPUOptions(per_process_gpu_memory_fraction=0.8))
 config.gpu_options.allow_growth = True
@@ -56,12 +54,9 @@ def plot_results(models, data, batch_size=128, model_name="font_vae"):
     plt.scatter(z_mean[:, 0], z_mean[:, 1], c=y_label,
                 cmap=plt.cm.get_cmap('tab10', n_class), s=5, alpha=0.5) # tab10, gist_rainbow
     font_name_list = list(plot_generator.class_indices.keys())
-    # ['7_DancingScript-Regular', '5_Bangers-Regular', '4_Righteous-Regular',
-    # '6_Pacifico-Regular','8_Inconsolata-Regular', '1_PT_Serif-Web-Regular',
-    # '0_EBGaramond-Regular', '3_Roboto-Regular','2_NotoSans-Regular', '9_VT323-Regular']
 
     cbar = plt.colorbar(ticks=range(n_class))
-    # cbar.set_ticklabels(font_name_list)
+    cbar.set_ticklabels(font_name_list)
     plt.xlabel("z_mean[0]")
     plt.ylabel("z_mean[1]")
     plt.savefig(filename)
@@ -70,13 +65,12 @@ def plot_results(models, data, batch_size=128, model_name="font_vae"):
 
 #################################################################################################
 #################################################################################################
-# Generating dataset
 batch_size = 128
 image_size = 112
 train_datagen = ImageDataGenerator(
-    # rotation_range=20,
-    # zoom_range=0.2,
-    # horizontal_flip=True,
+    rotation_range=20,
+    zoom_range=0.2,
+    horizontal_flip=True,
     rescale=1./255
 )
 
@@ -97,11 +91,9 @@ validation_generator = test_datagen.flow_from_directory(
     batch_size=batch_size,
     color_mode='grayscale',
     class_mode='input'
-    # shuffle=False
 )
 
 plot_generator = plot_datagen.flow_from_directory(
-    # 'data/valdataset',
     'data/dataset/validation',
     target_size=(112, 112),
     batch_size=validation_generator.n,
@@ -110,25 +102,19 @@ plot_generator = plot_datagen.flow_from_directory(
     shuffle=False
 )
 
-
-# _x_test, _y_test = zip(*(validation_generator[i] for i in range(len(validation_generator))))
-# x_test = np.vstack(_x_test)
-# y_test = np.vstack(_y_test)
-# y_label = validation_generator.index_array
 x_test, y_test = next(validation_generator)
 x_plot, y_plot = next(plot_generator)
 y_label = plot_generator.classes
 
-# network parameters
+
 input_shape = (image_size, image_size, 1)
 kernel_size = 3
 filters = 16
 latent_dim = 2
-epochs = 50
+epochs = 20
 log_dir='./font_vae_cnn/plot'
 
-# VAE model = encoder + decoder
-# build encoder model
+
 inputs = Input(shape=input_shape, name='Encoder_input')
 x = inputs
 
@@ -140,25 +126,20 @@ x = Conv2D(filters=128, kernel_size=kernel_size, activation='relu', strides=2, p
 x = Dropout(0.2)(x)
 x = Conv2D(filters=256, kernel_size=kernel_size, activation='relu', strides=2, padding='same')(x)
 
-# shape info needed to build decoder model
+
 shape = K.int_shape(x)
 
-# generate latent vector Q(z|X)
 x = Flatten()(x)
 x = Dense(16, activation='relu')(x)
 z_mean = Dense(latent_dim, name='z_mean')(x)
 z_log_var = Dense(latent_dim, name='z_log_var')(x)
 
-# use reparameterization trick to push the sampling out as input
-# note that "output_shape" isn't necessary with the TensorFlow backend
 z = Lambda(sampling, output_shape=(latent_dim,), name='z')([z_mean, z_log_var])
 
-# instantiate encoder model
 encoder = Model(inputs, [z_mean, z_log_var, z], name='Encoder')
 encoder.summary()
 plot_model(encoder, to_file='summary/font_vae_cnn_encoder.png', show_shapes=True)
 
-# build decoder model
 latent_inputs = Input(shape=(latent_dim,), name='z_sampling')
 x = Dense(shape[1] * shape[2] * shape[3], activation='relu')(latent_inputs)
 x = Reshape((shape[1], shape[2], shape[3]))(x)
@@ -173,12 +154,10 @@ x = Conv2DTranspose(filters=32, kernel_size=kernel_size, activation='relu', stri
 
 outputs = Conv2DTranspose(filters=1, kernel_size=kernel_size, activation='sigmoid', padding='same', name='Decoder_output')(x)
 
-# instantiate decoder model
 decoder = Model(latent_inputs, outputs, name='Decoder')
 decoder.summary()
 plot_model(decoder, to_file='summary/font_vae_cnn_decoder.png', show_shapes=True)
 
-# instantiate VAE model
 outputs = decoder(encoder(inputs)[2])
 vae = Model(inputs, outputs, name='VAE')
 
