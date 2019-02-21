@@ -1,4 +1,4 @@
-# Analysis of font shape <br/> using Variational Autoencoder with Convnets
+# Font-VAE: Font Shape Analysis using Variational Autoencoder with Convolutional Neural Networks
 
 
 
