@@ -67,10 +67,11 @@ batch_size = 128
 image_size = 112
 data_dir = 'data/dataset_5/'
 
-train_datagen = ImageDataGenerator(rotation_range=20,
-                                   zoom_range=0.2,
-                                   horizontal_flip=True,
-                                   rescale=1./255)
+# train_datagen = ImageDataGenerator(rotation_range=20,
+#                                    zoom_range=0.2,
+#                                    horizontal_flip=True,vertical_flip=True,
+#                                    rescale=1./255)
+train_datagen = ImageDataGenerator(rescale=1./255, zoom_range=0.1, horizontal_flip=True, vertical_flip=True)
 
 test_datagen = ImageDataGenerator(rescale=1./255)
 plot_datagen = ImageDataGenerator(rescale=1./255)
@@ -105,7 +106,7 @@ input_shape = (image_size, image_size, 1)
 kernel_size = 3
 filters = 16
 latent_dim = 2
-epochs = 100
+epochs = 80
 log_dir='./font_vae_cnn/plot'
 
 
