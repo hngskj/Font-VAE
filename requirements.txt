@@ -7,4 +7,4 @@ protobuf==3.6.1
 pydot==1.4.1
 scipy==1.2.0
 tensorboard==1.10.0
-tensorflow-gpu==1.10.0
+tensorflow-gpu==1.15.4
